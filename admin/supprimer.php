@@ -1,7 +1,19 @@
 <?php
+
+session_start();
+
+if(!isset($_SESSION['session77'])){
+  header("Location: ../login.php");
+}
+
+if(empty($_SESSION['session77'])){
+  header("Location: ../login.php");
+}
+
 require("../config/commandes.php");
-$produits=afficher();
+$Produits=afficher();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +36,7 @@ $produits=afficher();
     <label for="exampleInputPassword1">Identifiant du produit</label>
     <input type="number" class="form-control" name="idproduit" required>
   </div>
-  <button type="submit" name="valider" class="btn btn-primary">Supprimer un produit</button>
+  <button type="submit" name="valider" class="btn btn-warning">Supprimer un produit</button>
 </form>
     </div>
  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -42,10 +54,32 @@ $produits=afficher();
         <?php endforeach; ?>
 </div>
 </div></div>
-    
- 
 
 </body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ecommerce</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="../admin/">Nouveau</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="supprimer.php" style="font-weight: bold">Suppression</a>
+          <li class="nav-item">
+          <a class="nav-link" href="afficher.php">Produits</a>
+        </li>
+        </li>
+      </ul>
+      <div style="display: flex; justify-content: flex-end;">
+      <a href="deconnexion.php" class="btn btn-danger">Se déconnecter</a>
+        </div>      
+  </div>
+</nav>
 
 </html> 
 <?php

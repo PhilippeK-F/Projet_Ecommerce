@@ -1,5 +1,16 @@
 <?php
+session_start();
+
 require("../config/commandes.php");
+
+if(!isset($_SESSION['session77'])){
+  header("Location: ../login.php");
+}
+
+if(empty($_SESSION['session77'])){
+  header("Location: ../login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +24,32 @@ require("../config/commandes.php");
 </head>
 
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ecommerce</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../admin/" style="font-weight: bold">Nouveau</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="supprimer.php">Suppression</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="afficher.php">Produits</a>
+        </li>
+      </ul>
+       <div style="display: flex; justify-content: flex-end;">
+      <a href="deconnexion.php" class="btn btn-danger">Se déconnecter</a>
+    </div>
+  </div>
+</nav>
+
+
     <div class="album py-5 bg-light">
     <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -34,7 +71,7 @@ require("../config/commandes.php");
     <label for="exampleInputPassword1">Description</label>
     <textarea class="form-control" name="description" required></textarea>
   </div>
-  <button type="submit" name="valider" class="btn btn-primary">Ajouter un nouveau produit</button>
+  <button type="submit" name="valider" class="btn btn-success">Ajouter un nouveau produit</button>
 </form>
     </div></div></div>
     

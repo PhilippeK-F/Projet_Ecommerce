@@ -1,5 +1,19 @@
 <?php
+function getAdmin($email, $password) {
+      if(require("connexion.php"))
+    {
+        $req = $access->prepare("SELECT * FROM 'admin' WHERE email = ? AND motdepasse = ?");
+        $req->execute(array($email, $password));
+        if($req->rowCount() == 1){
+            $data = $req->fetch();
+            return $data;
+        }else{
+            return false;
+        }
+        $req->closeCursor();
+    }
 
+}
 function ajouter($image, $nom, $prix, $description)
 {
     if(require("connexion.php"))
@@ -19,7 +33,7 @@ function afficher()
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         
         return $data;
-
+        
         $req->closeCursor();
     }
 }
