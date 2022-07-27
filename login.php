@@ -1,15 +1,14 @@
 <?php
 
 session_start();
-include "config/commandes.php";
 
-
-if(isset($_SESSION['session77']))
-{
-    if(!empty($_SESSION['session77']))
-    {
-    }
+if(isset($_SESSION['session77'])){
+  if(!empty($_SESSION['session77'])){
+  header("Location: admin/");
 }
+}
+
+include "config/commandes.php";
 
 ?>
 <!DOCTYPE html>
@@ -71,34 +70,3 @@ if(isset($_POST['envoyer'])){
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

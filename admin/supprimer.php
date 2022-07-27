@@ -26,36 +26,6 @@ $Produits=afficher();
 </head>
 
 <body>
-    <div class="album py-5 bg-light">
-    <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-    <form method="post">
- 
-  <div class="mb-3">
-    <label for="exampleInputPassword1">Identifiant du produit</label>
-    <input type="number" class="form-control" name="idproduit" required>
-  </div>
-  <button type="submit" name="valider" class="btn btn-warning">Supprimer un produit</button>
-</form>
-    </div>
- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <?php foreach($produits as $produit): ?>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="<?= $produit->image ?>">
-            <h3><?= $produit->id ?></h3>
-
-            <div class="card-body">
-            </div>
-          </div>
-        </div>
-        <?php endforeach; ?>
-</div>
-</div></div>
-
-</body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -81,6 +51,36 @@ $Produits=afficher();
   </div>
 </nav>
 
+    <div class="album py-5 bg-light">
+    <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    <form method="post">
+ 
+  <div class="mb-3">
+    <label for="exampleInputPassword1">Identifiant du produit</label>
+    <input type="number" class="form-control" name="idproduit" required>
+  </div>
+  <button type="submit" name="valider" class="btn btn-warning">Supprimer un produit</button>
+</form>
+    </div>
+ <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <?php foreach($Produits as $produit): ?>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="<?= $produit->image ?>">
+            <h3><?= $produit->id ?></h3>
+
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+</div>
+</div></div>
+
+</body>
 </html> 
 <?php
 

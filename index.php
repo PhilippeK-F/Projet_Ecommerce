@@ -2,7 +2,7 @@
 
 require("config/commandes.php");
 
-$produits=afficher();
+$Produits=afficher();
 
 ?>
 
@@ -91,7 +91,7 @@ $produits=afficher();
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
           <ul class="list-unstyled">
-            <li><a href="admin/index.php" class="text-white">Connexion</a></li>
+            <li><a href="login.php" class="text-white">Se connecter</a></li>
           </ul>
         </div>
       </div>
@@ -247,14 +247,15 @@ $produits=afficher();
           </div>
         </div>
 
-        <?php foreach($produits as $produit): ?>
+        <?php foreach($Produits as $produit): ?>
 
         <div class="col">
           <div class="card shadow-sm">
-            <title><?= $produit->nom ?></title><img src="<?= $produit->image ?>">
+            <h4><?= $produit->nom ?></h4>
+            <img src="<?= $produit->image ?>" style="width: 50%">
 
             <div class="card-body">
-              <p class="card-text"><?= $produit->description ?></p>
+              <p class="card-text"><?= substr($produit->description, 0, 200); ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Acheter</button>

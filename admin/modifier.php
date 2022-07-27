@@ -1,7 +1,15 @@
 <?php
 session_start();
 
-require("../config/commandes.php");
+$id = $_GET['pdt'];
+
+foreach($produits as $produit){
+    $nom = $produit->nom;
+    $idPdt = $produit->id;
+    $image = $produit->image;
+    $description = $produit->description;
+    $prix = $produit->prix;
+}
 
 if(!isset($_SESSION['session77'])){
   header("Location: ../login.php");
@@ -10,6 +18,16 @@ if(!isset($_SESSION['session77'])){
 if(empty($_SESSION['session77'])){
   header("Location: ../login.php");
 }
+
+if(!isset($_GET['pdt'])){
+header("Location: afficher.php");
+}
+    if(empty($_GET['pdt']) AND !is_numeric($_GET['pdt'])){
+    header("Location: afficher.php");
+}
+
+require("../config/commandes.php");
+$produits=getProduits($id);
 
 ?>
 <!DOCTYPE html>
@@ -34,13 +52,16 @@ if(empty($_SESSION['session77'])){
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../admin/" style="font-weight: bold">Nouveau</a>
+          <a class="nav-link" aria-current="page" href="../admin/">Nouveau</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="supprimer.php">Suppression</a>
         </li>
           <li class="nav-item">
           <a class="nav-link" href="afficher.php">Produits</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" style="font-weight: bold; color: green">Modification</a>
         </li>
       </ul>
        <div style="display: flex; justify-content: flex-end;">
@@ -57,25 +78,23 @@ if(empty($_SESSION['session77'])){
     <form method="post">
   <div class="mb-3">
     <label for="exampleInputEmail1">Titre de l'image</label>
-    <input type="name" class="form-control" name="image" required>
+    <input type="name" class="form-control" name="image" value="<?= $image ?>" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1">Nom du produit</label>
-    <input type="text" class="form-control" name="nom" required>
+    <input type="text" class="form-control" name="nom" value="<?= $nom ?>" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1">Prix</label>
-    <input type="number" class="form-control" name="prix" required>
+    <input type="number" class="form-control" name="prix" value="<?= $prix ?>" required>
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1">Description</label>
-    <textarea class="form-control" name="description" required></textarea>
+    <label for="exampleInputPassword1">Description</label> 
+    <textarea class="form-control" name="description" value="<?= $description ?>" required></textarea>
   </div>
-  <button type="submit" name="valider" class="btn btn-success">Ajouter un nouveau produit</button>
+  <button type="submit" name="valider" class="btn btn-success">Enregistrer les modifications</button>
 </form>
     </div></div></div>
-    
- 
 
 </body>
 
@@ -93,11 +112,10 @@ if(isset($_POST['valider']))
       $prix = htmlspecialchars(strip_tags($_POST['prix']));
       $description = htmlspecialchars(strip_tags($_POST['description']));
 
-      try {
-        ajouter($image, $nom, $prix, $description);
-      } catch (Exception $e) {
-        $e->getMessage();
-      }
+        modifier($image, $nom, $prix, $description, $id);
+        
+        header("Location: afficher.php");
+   
      
     }
     }
